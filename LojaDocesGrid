@@ -1,0 +1,59 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class LojaDocesGrid {
+    public static void main(String[] args) {
+        // Janela principal
+        JFrame frame = new JFrame("Loja de Doces - GridLayout");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 300);
+        frame.setLayout(new BorderLayout(10, 10)); // Usamos BorderLayout principal
+
+        // Painel com GridLayout para os botões
+        JPanel painelGrid = new JPanel(new GridLayout(3, 2, 10, 10));
+
+        // Carrinho (centro da tela)
+        JTextArea areaCarrinho = new JTextArea();
+        areaCarrinho.setEditable(false);
+        JScrollPane scrollCarrinho = new JScrollPane(areaCarrinho);
+
+        // Criação dos botões e rótulos
+        JLabel docesLabel = new JLabel("Doces:");
+        JLabel precoLabel = new JLabel("Preço:");
+
+        JButton balaBtn = new JButton("Bala - R$1,00");
+        JButton chocBtn = new JButton("Chocolate - R$2,50");
+        JButton pirulitoBtn = new JButton("Pirulito - R$1,50");
+        JButton finalizarBtn = new JButton("Finalizar Compra");
+
+        // Adiciona os componentes ao painel com GridLayout
+        painelGrid.add(docesLabel);
+        painelGrid.add(precoLabel);
+        painelGrid.add(balaBtn);
+        painelGrid.add(chocBtn);
+        painelGrid.add(pirulitoBtn);
+        painelGrid.add(finalizarBtn);
+
+        // Ações dos botões
+        balaBtn.addActionListener(e -> areaCarrinho.append("Bala adicionada ao carrinho\n"));
+        chocBtn.addActionListener(e -> areaCarrinho.append("Chocolate adicionado ao carrinho\n"));
+        pirulitoBtn.addActionListener(e -> areaCarrinho.append("Pirulito adicionado ao carrinho\n"));
+
+        finalizarBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(frame, "Compra finalizada!\n\nItens:\n" + areaCarrinho.getText());
+                areaCarrinho.setText(""); // Limpa o carrinho
+            }
+        });
+
+        // Adiciona painel e carrinho ao layout principal
+        frame.add(painelGrid, BorderLayout.NORTH);
+        frame.add(scrollCarrinho, BorderLayout.CENTER);
+
+        // Exibe a janela
+        frame.setVisible(true);
+    }
+}
+    
