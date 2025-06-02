@@ -1,0 +1,56 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class LojaDocesBorder {
+    public static void main(String[] args) {
+        // Criar janela principal
+        JFrame frame = new JFrame("Loja de Doces - BorderLayout");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 300);
+        frame.setLayout(new BorderLayout(10, 10));
+
+        // Título
+        JLabel titulo = new JLabel("Bem-vindo à Loja de Doces!", SwingConstants.CENTER);
+
+        // Área do carrinho
+        JTextArea areaCarrinho = new JTextArea();
+        areaCarrinho.setEditable(false); // para não digitar no carrinho
+
+        // Botões
+        JButton botaoBala = new JButton("Comprar Balas");
+        JButton botaoChoc = new JButton("Comprar Chocolates");
+        JButton botaoFinalizar = new JButton("Finalizar Compra");
+
+        // Ações dos botões
+        botaoBala.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                areaCarrinho.append("Bala adicionada ao carrinho\n");
+            }
+        });
+
+        botaoChoc.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                areaCarrinho.append("Chocolate adicionado ao carrinho\n");
+            }
+        });
+
+        botaoFinalizar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(frame, "Compra finalizada!\n\nItens:\n" + areaCarrinho.getText());
+                areaCarrinho.setText(""); // Limpa o carrinho
+            }
+        });
+
+        // Adiciona ao layout
+        frame.add(titulo, BorderLayout.NORTH);
+        frame.add(botaoBala, BorderLayout.WEST);
+        frame.add(botaoChoc, BorderLayout.EAST);
+        frame.add(botaoFinalizar, BorderLayout.SOUTH);
+        frame.add(new JScrollPane(areaCarrinho), BorderLayout.CENTER); // rolagem
+
+        // Exibe a janela
+        frame.setVisible(true);
+    }
+}
